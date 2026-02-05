@@ -15,4 +15,5 @@ public interface PlayerService {
     public List<Player> getAllPlayerByTeamAndRole(String teamName, String role);
     public Player updatePlayer(Player player);
     public void deleteOnePlayer(Player player);
+    public void deleteOnePlayerByName(String name);
 }

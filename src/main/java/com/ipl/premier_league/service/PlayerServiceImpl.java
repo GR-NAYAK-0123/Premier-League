@@ -3,8 +3,12 @@ package com.ipl.premier_league.service;
 import com.ipl.premier_league.model.Player;
 import com.ipl.premier_league.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +19,7 @@ import java.util.stream.Collectors;
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepo;
+    private final PlayerService playerService;
 
     //This method save/register One new Player into the database
     @Override
@@ -94,5 +99,10 @@ public class PlayerServiceImpl implements PlayerService {
         playerRepo.deleteByName(player.getName());
     }
 
+    //This method will delete One player by his name
+    @Override
+    public void deleteOnePlayerByName(String name) {
+        playerRepo.deleteByName(name);
+    }
 
 }

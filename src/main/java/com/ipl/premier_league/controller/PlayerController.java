@@ -3,10 +3,9 @@ package com.ipl.premier_league.controller;
 import com.ipl.premier_league.model.Player;
 import com.ipl.premier_league.service.PlayerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,4 +36,25 @@ public class PlayerController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity<?> addOnePlayer(@RequestBody Player player){
+        return new ResponseEntity<>(playerService.savePlayer(player), HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updatePlayer(@RequestBody Player player){
+        Player updatedPlayer = playerService.updatePlayer(player);
+        if(updatedPlayer != null){
+            return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{playerName}")
+    public ResponseEntity<?> deletePlayerByName(@PathVariable String playerName){
+        playerService.deleteOnePlayerByName(playerName);
+        return new ResponseEntity<>("Player got deleted Successfully", HttpStatus.OK);
+    }
 }
