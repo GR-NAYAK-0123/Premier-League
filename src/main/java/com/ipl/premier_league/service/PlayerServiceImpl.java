@@ -4,8 +4,10 @@ import com.ipl.premier_league.model.Player;
 import com.ipl.premier_league.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -65,6 +67,31 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepo.findAll().stream()
                 .filter(player -> player.getTeam().equals(teamName) && player.getRole().equals(role))
                 .collect(Collectors.toList());
+    }
+
+    //This Method is used to update the details of an existing player
+    @Override
+    public Player updatePlayer(Player player) {
+        Optional<Player> optional = playerRepo.findByName(player.getName());
+        if (optional.isPresent()){
+            Player existingPlayer = optional.get();
+            existingPlayer.setNation(player.getNation());
+            existingPlayer.setTeam(player.getTeam());
+            existingPlayer.setRole(player.getRole());
+            existingPlayer.setAge(player.getAge());
+            existingPlayer.setActive(player.getActive());
+            //Save the player
+            playerRepo.save(existingPlayer);
+            return existingPlayer;
+        }
+        return null;
+    }
+
+    //This Method is used to delete One Player details from the database
+    @Transactional
+    @Override
+    public void deleteOnePlayer(Player player) {
+        playerRepo.deleteByName(player.getName());
     }
 
 
