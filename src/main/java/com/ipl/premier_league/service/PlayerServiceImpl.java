@@ -80,6 +80,11 @@ public class PlayerServiceImpl implements PlayerService {
             existingPlayer.setRole(player.getRole());
             existingPlayer.setAge(player.getAge());
             existingPlayer.setActive(player.getActive());
+            existingPlayer.setJerseyNumber(player.getJerseyNumber());
+            existingPlayer.setCenturies(player.getCenturies());
+            existingPlayer.setFifties(player.getFifties());
+            existingPlayer.setWickets(player.getWickets());
+            existingPlayer.setBestScore(player.getBestScore());
             //Save the player
             playerRepo.save(existingPlayer);
             return existingPlayer;

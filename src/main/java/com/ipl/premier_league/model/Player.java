@@ -42,13 +42,13 @@ public class Player {
 
     private Integer jerseyNumber;
 
-    @Min(0)
+//    @Min(0)
     private Integer centuries;
 
-    @Min(0)
+  //  @Min(0)
     private Integer fifties;
 
-    @Min(0)
+  //  @Min(0)
     private Integer wickets;
 
     private String bestScore;
