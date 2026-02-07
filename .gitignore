@@ -9,7 +9,7 @@ target/
 *.log
 
 ### Environment / Config ###
-application.properties
+###application.properties
 application.yml
 .env
 
