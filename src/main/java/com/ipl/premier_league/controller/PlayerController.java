@@ -20,7 +20,7 @@ public class PlayerController {
     public List<Player> getPlayers(@RequestParam(required = false) String name,
                                    @RequestParam(required = false) String team,
                                    @RequestParam(required = false) String role,
-                                   @RequestParam(required = false) String nation){
+                                   @RequestParam(required = false) String nation) throws Exception{
         if (team != null && role != null){
             return playerService.getAllPlayerByTeamAndRole(team, role);
         } else if (name != null) {
@@ -37,12 +37,12 @@ public class PlayerController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addOnePlayer(@RequestBody Player player){
+    public ResponseEntity<?> addOnePlayer(@RequestBody Player player) throws Exception{
         return new ResponseEntity<>(playerService.savePlayer(player), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<?> updatePlayer(@RequestBody Player player){
+    public ResponseEntity<?> updatePlayer(@RequestBody Player player) throws Exception{
         Player updatedPlayer = playerService.updatePlayer(player);
         if(updatedPlayer != null){
             return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
@@ -53,7 +53,7 @@ public class PlayerController {
     }
 
     @DeleteMapping("/{playerName}")
-    public ResponseEntity<?> deletePlayerByName(@PathVariable String playerName){
+    public ResponseEntity<?> deletePlayerByName(@PathVariable String playerName) throws Exception{
         playerService.deleteOnePlayerByName(playerName);
         return new ResponseEntity<>("Player got deleted Successfully", HttpStatus.OK);
     }
