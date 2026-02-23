@@ -2,6 +2,7 @@ package com.ipl.premier_league.controller;
 
 import com.ipl.premier_league.model.Player;
 import com.ipl.premier_league.service.PlayerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class PlayerController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addOnePlayer(@RequestBody Player player) throws Exception{
+    public ResponseEntity<?> addOnePlayer(@Valid @RequestBody Player player) throws Exception{
         return new ResponseEntity<>(playerService.savePlayer(player), HttpStatus.CREATED);
     }
 
