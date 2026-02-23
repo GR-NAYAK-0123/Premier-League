@@ -92,18 +92,10 @@ public class PlayerServiceImpl implements PlayerService {
         return null;
     }
 
-    //This Method is used to delete One Player details from the database
-    @Transactional
+    //This method will delete one player based on his id
     @Override
-    public void deleteOnePlayer(Player player) {
-        playerRepo.deleteByName(player.getName());
-    }
-
-    //This method will delete One player by his name
-    @Transactional
-    @Override
-    public void deleteOnePlayerByName(String name) {
-        playerRepo.deleteByName(name);
+    public void deletePlayerById(String id) {
+        playerRepo.deleteById(id);
     }
 
 }

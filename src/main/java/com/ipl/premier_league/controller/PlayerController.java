@@ -53,9 +53,9 @@ public class PlayerController {
         }
     }
 
-    @DeleteMapping("/{playerName}")
-    public ResponseEntity<?> deletePlayerByName(@PathVariable String playerName) throws Exception{
-        playerService.deleteOnePlayerByName(playerName);
+    @DeleteMapping("/Id/{id}")
+    public ResponseEntity<?> deletePlayerByHisId(@PathVariable String id) throws Exception{
+        playerService.deletePlayerById(id);
         return new ResponseEntity<>("Player got deleted Successfully", HttpStatus.OK);
     }
 }
