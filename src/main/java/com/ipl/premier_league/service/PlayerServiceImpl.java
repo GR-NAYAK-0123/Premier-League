@@ -100,6 +100,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     //This method will delete One player by his name
+    @Transactional
     @Override
     public void deleteOnePlayerByName(String name) {
         playerRepo.deleteByName(name);
