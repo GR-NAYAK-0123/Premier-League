@@ -10,45 +10,36 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "players_stats")
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Player {
     @Id
     private String id;
 
-    @NonNull
-    @NotBlank
+    @NotBlank(message = "Name is required")
     private String name;
 
-    @NonNull
-    @NotBlank
+    @NotBlank(message = "Nation is required")
     private String nation;
 
-    @NonNull
-    @NotBlank
+    @NotBlank(message = "Team is required")
     private String team;
 
-    @NonNull
-    @NotBlank
+    @NotBlank(message = "Role is required")
     private String role;
 
-    @NonNull
-    @NotNull
-    @Min(value = 18)
+    @NotNull(message = "Age is required")
+    @Min(value = 18, message = "Age must be at least 18")
     private Integer age;
 
-    @NonNull
-    @NotNull
+    @NotNull(message = "Active status is required")
     private Boolean active;
 
     private Integer jerseyNumber;
 
-//    @Min(0)
     private Integer centuries;
 
-  //  @Min(0)
     private Integer fifties;
 
-  //  @Min(0)
     private Integer wickets;
 
     private String bestScore;
