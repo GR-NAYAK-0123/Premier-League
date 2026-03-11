@@ -4,6 +4,7 @@ import com.ipl.premier_league.model.Player;
 import com.ipl.premier_league.service.PlayerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/players")
+@Slf4j
 public class PlayerController {
 
     private final PlayerService playerService;
@@ -39,11 +41,13 @@ public class PlayerController {
 
     @PostMapping
     public ResponseEntity<?> addOnePlayer(@Valid @RequestBody Player player) throws Exception{
+        log.info("Request hit in controller for player addition in db.");
         return new ResponseEntity<>(playerService.savePlayer(player), HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<?> updatePlayer(@RequestBody Player player) throws Exception{
+        log.info("Request hit in controller for player updation in db.");
         Player updatedPlayer = playerService.updatePlayer(player);
         if(updatedPlayer != null){
             return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
@@ -55,6 +59,7 @@ public class PlayerController {
 
     @DeleteMapping("/Id/{id}")
     public ResponseEntity<?> deletePlayerByHisId(@PathVariable String id) throws Exception{
+        log.info("Request hit in controller for player deletion in db.");
         playerService.deletePlayerById(id);
         return new ResponseEntity<>("Player got deleted Successfully", HttpStatus.OK);
     }
